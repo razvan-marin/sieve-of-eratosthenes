@@ -1,19 +1,15 @@
-// generates prime numbers
 static IEnumerable<int> Primes()
 {
-    static IEnumerable<int> Sieve(int number)
+    static IEnumerable<int> Sieve(int prime)
     {
-        // this is a prime
-        yield return number;
+        yield return prime;
 
-        // keep sieving and skip multiples of this number
-        foreach (var other in Sieve(number + 1).Where(other => other % number != 0))
+        foreach (var nextPrime in Sieve(prime + 1).Where(number => number % prime != 0))
         {
-            yield return other;
+            yield return nextPrime;
         }
     }
 
-    // start sieving from 2
     return Sieve(2);
 }
 
@@ -21,6 +17,12 @@ static void Main()
 {
     // display the first 100 prime numbers
     foreach (var prime in Primes().Take(100))
+    {
+        Console.WriteLine(prime);
+    }
+
+    // display all primes numbers between 100 and 1000
+    foreach (var prime in Primes().SkipWhile(prime => prime > 100).TakeWhile(prime => prime < 1000))
     {
         Console.WriteLine(prime);
     }
