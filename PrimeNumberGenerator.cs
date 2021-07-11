@@ -22,7 +22,7 @@ static void Main()
     }
 
     // display all primes numbers between 100 and 1000
-    foreach (var prime in Primes().SkipWhile(prime => prime > 100).TakeWhile(prime => prime < 1000))
+    foreach (var prime in Primes().SkipWhile(prime => prime < 100).TakeWhile(prime => prime < 1000))
     {
         Console.WriteLine(prime);
     }
